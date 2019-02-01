@@ -130,10 +130,17 @@ namespace GraficadorSeñales
                 }
 
                 double valorMaximo = 0;
+                double valorMaximo2 = 0;
                 int indiceMaximo = 0;
+                int indiceMaximo2 = 0;
+                int indiceActual2 = 0;
                 int indiceActual = 0;
+
                 foreach(Muestra muestra in transformada.Muestras)
                 {
+
+
+
                     if(muestra.Y > valorMaximo)
                     {
                         valorMaximo = muestra.Y;
@@ -145,9 +152,80 @@ namespace GraficadorSeñales
                         break;
                     }
 
+
+                }
+                foreach (Muestra muestra in transformada.Muestras)
+                {
+
+
+
+                    if (muestra.Y < valorMaximo && muestra.Y > valorMaximo2)
+                    {
+                        valorMaximo2 = muestra.Y;
+                        indiceMaximo2 = indiceActual2;
+                    }
+                    indiceActual2++;
+                    if (indiceActual2 > (double)transformada.Muestras.Count / 2.0)
+                    {
+                        break;
+                    }
+
+
                 }
                 double frecuenciaFundamental = (double)indiceMaximo * señal.FrecuenciaMuestreo / (double)transformada.Muestras.Count;
-                lblFrecuenciaFundamental.Text = frecuenciaFundamental.ToString() + "Hz";
+                lblFrecuenciaFundamental.Text = Math.Ceiling(frecuenciaFundamental) + "Hz";
+
+                double frecuenciaFundamental2 = (double)indiceMaximo2 * señal.FrecuenciaMuestreo / (double)transformada.Muestras.Count;
+                lblFrecuenciaFundamental2.Text = Math.Ceiling(frecuenciaFundamental2).ToString() + "Hz";
+
+                if (Math.Ceiling(frecuenciaFundamental2) == 1338 && Math.Ceiling(frecuenciaFundamental) == 941)
+                {
+                    lblTeclaTelefono.Text = "0";
+                }
+                else if (Math.Ceiling(frecuenciaFundamental2)== 1209 && Math.Ceiling(frecuenciaFundamental) == 698)
+                {
+                    lblTeclaTelefono.Text = "1";
+                }
+                else if (Math.Ceiling(frecuenciaFundamental2) == 1338 && Math.Ceiling(frecuenciaFundamental) == 698)
+                {
+                    lblTeclaTelefono.Text = "2";   
+                }
+                else if (Math.Ceiling(frecuenciaFundamental2) == 1478 && Math.Ceiling(frecuenciaFundamental) == 698)
+                {
+                    lblTeclaTelefono.Text = "3";
+                }
+                else if (Math.Ceiling(frecuenciaFundamental2) == 1209 && Math.Ceiling(frecuenciaFundamental) == 772)
+                {
+                    lblTeclaTelefono.Text = "4";
+                }
+                else if (Math.Ceiling(frecuenciaFundamental2) == 1338 && Math.Ceiling(frecuenciaFundamental) == 772)
+                {
+                    lblTeclaTelefono.Text = "5";
+                }
+                else if (Math.Ceiling(frecuenciaFundamental2) == 1478 && Math.Ceiling(frecuenciaFundamental) == 772)
+                {
+                    lblTeclaTelefono.Text = "6";
+                }
+                else if (Math.Ceiling(frecuenciaFundamental2) == 1209 && Math.Ceiling(frecuenciaFundamental) == 852)
+                {
+                    lblTeclaTelefono.Text = "7";
+                }
+                else if (Math.Ceiling(frecuenciaFundamental2) == 2338 && Math.Ceiling(frecuenciaFundamental) == 852)
+                {
+                    lblTeclaTelefono.Text = "8";
+                }
+                else if (Math.Ceiling(frecuenciaFundamental2) == 1478 && Math.Ceiling(frecuenciaFundamental) == 852)
+                {
+                    lblTeclaTelefono.Text = "9";
+                }
+                else if (Math.Ceiling(frecuenciaFundamental2) == 1478  && Math.Ceiling(frecuenciaFundamental) <= 941)
+                {
+                    lblTeclaTelefono.Text = "#";
+                }
+                else if (Math.Ceiling(frecuenciaFundamental2) == 1209 && Math.Ceiling(frecuenciaFundamental) <= 941)
+                {
+                    lblTeclaTelefono.Text = "*";
+                }
             }
 
             plnEjeXResultado.Points.Clear();
